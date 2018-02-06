@@ -1,7 +1,7 @@
 import javax.swing.JFrame;
 
 public class Driver {
-	public void main (String[] args) {
+	public static void main (String[] args) {
 			Control c = new Control();
 			UI gui = new UI();
 			//c.setUI(gui);
