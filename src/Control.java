@@ -1,3 +1,5 @@
+import java.io.*;
+import javax.swing.JFileChooser;
 
 public class Control {
 
@@ -52,4 +54,93 @@ public class Control {
         
 	}
 	
+}
+
+class TimeSlot {
+	
+	private int needed;
+	private int scheduled;
+	private int coverage;
+	
+	public TimeSlot() {
+		needed = 0;
+		scheduled = 0;
+		coverage = 0;
+	}
+	
+	public void addNeeded() {
+		needed++;
+		coverage--;
+	}
+	
+	public void addScheduled() {
+		scheduled++;
+		coverage++;
+	}
+	
+	public int getCoverage() {
+		return coverage;
+	}
+	
+	///TODO: update this so it differentiates between the first and second instance of a day of the week
+		//i.e. which sunday is it? theres 2 options - need to know specific date/time
+	//given the index the time slot is in, what time is that?
+		//this will probably only be called while drawing the bar graph
+		//@param index is index of the TimeSlot
+		//@return a String that represents a time - format: "Day, XX:XX"  ***probably will change in the future to add specific date***
+	public static String getTime(int index) {
+		//add 1/4 of an hour per index
+		double t = 0.00 + .25 * index;
+		//the day is how many times 24 fits into the time
+		int day = ((int)(t/24));
+		//the hour is the remainder of t/24
+		int hour = ((int)t) % 24;
+		//the minute is 3/5ths of the decimal portion of t
+		int min = ((int)(t * 100)) % 100 * 3/5;
+
+		//convert the int day into the correct day of the week String
+		String time = "";
+		switch(day) {
+		case 0: time = "Sunday";
+			break;
+		case 1: time = "Monday";
+			break;
+		case 2: time = "Tuesday";
+			break;
+		case 3: time = "Wednesday";
+			break;
+		case 4: time = "Thursday";
+			break;
+		case 5: time = "Friday";
+			break;
+		case 6: time = "Saturday";
+			break;
+		default: break;
+		}
+		
+		//return the combo of it all for a info-heavy string
+		return time + ", " + hour + ":" + min;
+	}
+	
+	///TODO: fix the problems with times that aren't exactly 15 minute increval
+		//should round to nearest 15-minute increval
+	//given the day and time, what index is that?
+		//this will probably only be called while parsing the data and populating the list of TimeSlots
+		//@param day is the day of the week in integer format: 0 = first Sunday, 1 = first Monday, 7 = second Sunday, 8 = second Monday, etc.
+		//@param time is a String to represent the numerical time - format: "XX:XX" so "02:15" is valid
+		//@return the index corresponding to this day/time
+	public static int getIndex(int day, String time) {
+		//time should be in a XX:XX format
+		int hour = Integer.parseInt(time.substring(0, 2));
+		int min = Integer.parseInt(time.substring(3));
+		//1 index per 15 minutes
+		int index = min/15;
+		//4 indices per hour
+		index += 4*hour;
+		//96 indices per day
+		index += 96*day;
+		
+		//return the correct index for this time
+		return index;
+	}
 }
