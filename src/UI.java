@@ -10,9 +10,10 @@ public class UI extends JFrame{
 		JPanel	panel = new JPanel();
 
 		this.getContentPane().add(panel);
-		this.setSize(500, 500);;
-		this.validate();
+		this.setSize(500, 500);
 		
+		
+		this.validate();
 		this.setVisible(true);
 	}
 	public void setControl(Control c) {
