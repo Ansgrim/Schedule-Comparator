@@ -5,6 +5,9 @@ public class Control {
 
 	//simple main method - to be deleted upon completion of project
 	public static void main(String[] args) throws IOException {
+		
+		TimeSlot[] shifts = new TimeSlot[1334];
+		
 		//file chooser for picking the file - simple, quick for testing purposes - need file restrictions eventually
 		JFileChooser fc = new JFileChooser();
 		int returnVal = fc.showOpenDialog(null);
@@ -17,33 +20,44 @@ public class Control {
             BufferedReader br = new BufferedReader(new FileReader(fn));
             String line = "";
             
-            //get rid of the top lines of code - currently deletes top 18 lines which works, but NEEDS TO CHANGE IN CASE OF DISASTER
-            for(int i = 0; i < 18; i++) {
-            	//gonna need the date/time in this area at some point
+            //get rid of the top lines of code - parse until you find the first quote
+            boolean gate = true;
+            while(gate) {
             	line = br.readLine();
+            	if(line.length() > 0 && line.charAt(0) == '\"')
+            		gate = false;
             }
-            
-            //read in the rest - this should be names in the first 2 blocks, + shifts
-            while ((line = br.readLine()) != null) {
+                        
+            //read in the rest - this should be names in the first 2 blocks, followed by lots of shifts
+            while (line != null) {
                 //System.out.println(line);    //LINE OF CODE FOR TESTING PURPOSES
-            	String[] shifts = line.split(",");	//csv, so split on commas
+            	String[] sh = line.split(",");	//csv, so split on commas
             	
             	//This prevents the code from crashing if theres empty lines at the end
-                if(shifts.length > 0 ) {
+                if(sh.length > 0 ) {
                 	//Find the 2-letter designation for a person
                 	//The name takes up two indicies cause they separate the last and first names with a comma
-                    String id = shifts[0].substring(1, 3);
+                    String id = sh[0].substring(1, 3);
                 	System.out.println(id);		//LINE OF CODE FOR TESTING PURPOSES
                 }
                 //Parse through the rest of the line, this should be just times
                 //The dayofweek represents the day of the week the shift is on
                 //the first sunday = 2, first monday = 3, first tuesday = 4, etc.
                 //look I know it's weird but its just how its gotta work
-                for(int dayofweek = 2; dayofweek < shifts.length;  dayofweek++)
+                for(int dayofweek = 2; dayofweek < sh.length;  dayofweek++)
                 {
-                	System.out.print(shifts[dayofweek] + " ");
+                	System.out.print(sh[dayofweek] + " ");
+                	//If the shift exists for this day, add it
+                	if(sh[dayofweek].length() > 0)
+                	{
+                		//We increment the TimeSlot associated with the shift - addNeeded for OPAS schedules, addScheduled for MOU schedules
+                			//We know what TimeSlot it is via the TimeSlot method
+                		shifts[TimeSlot.getIndex(dayofweek-2, sh[dayofweek])].addNeeded();
+                	}
                 }
                 System.out.println();
+                //Get the next line
+                line = br.readLine();
             }
             
         }
@@ -119,7 +133,12 @@ class TimeSlot {
 		}
 		
 		//return the combo of it all for a info-heavy string
-		return time + ", " + hour + ":" + min;
+		String ret = time + ", " + hour + ":";
+		if(min < 10)
+			ret = ret + "0" + min;
+		else
+			ret = ret + min;
+		return ret;
 	}
 	
 	///TODO: fix the problems with times that aren't exactly 15 minute increval
@@ -142,5 +161,11 @@ class TimeSlot {
 		
 		//return the correct index for this time
 		return index;
+	}
+	
+	//toString method, prints scheduled, needed, and coverage of this TimeSlot
+	//NOTE: the TimeSlot does not know what time it resides in
+	public String toString() {
+		return "Scheduled: " + scheduled + "   Needed: " + needed + "   Coverage: " + coverage;
 	}
 }
