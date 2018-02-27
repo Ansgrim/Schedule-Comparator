@@ -144,12 +144,10 @@ class TimeSlot {
 		return coverage;
 	}
 
-	///TODO: update this so it differentiates between the first and second instance of a day of the week
-	//i.e. which sunday is it? theres 2 options - need to know specific date/time
 	//given the index the time slot is in, what time is that?
 	//this will probably only be called while drawing the bar graph
 	//@param index is index of the TimeSlot
-	//@return a String that represents a time - format: "Day, XX:XX"  ***probably will change in the future to add specific date***
+	//@return a String that represents a time - format: "Day, XX:XX"  ***may change in the future to add specific date***
 	public static String getTime(int index) {
 		//add 1/4 of an hour per index
 		double t = 0.00 + .25 * index;
@@ -177,6 +175,20 @@ class TimeSlot {
 		break;
 		case 6: time = "Saturday";
 		break;
+		case 7: time = "2nd Sunday";
+		break;
+		case 8: time = "2nd Monday";
+		break;
+		case 9: time = "2nd Tuesday";
+		break;
+		case 10: time = "2nd Wednesday";
+		break;
+		case 11: time = "2nd Thursday";
+		break;
+		case 12: time = "2nd Friday";
+		break;
+		case 13: time = "2nd Saturday";
+		break;
 		default: break;
 		}
 
@@ -189,8 +201,6 @@ class TimeSlot {
 		return ret;
 	}
 
-	///TODO: fix the problems with times that aren't exactly 15 minute increval
-	//should round to nearest 15-minute increval
 	//given the day and time, what index is that?
 	//this will probably only be called while parsing the data and populating the list of TimeSlots
 	//@param day is the day of the week in integer format: 0 = first Sunday, 1 = first Monday, 7 = second Sunday, 8 = second Monday, etc.
@@ -200,6 +210,19 @@ class TimeSlot {
 		//time should be in a XX:XX format
 		int hour = Integer.parseInt(time.substring(0, 2));
 		int min = Integer.parseInt(time.substring(3));
+		//Rounding to nearest 15 minutes
+		if(min >= 8 && min <= 22)
+			min = 15;
+		else if(min >= 23 && min <= 37)
+			min = 30;
+		else if(min >= 38 && min <= 52)
+			min = 45;
+		else if(min >= 53) {
+			min = 0;	//When rounding up to nearest hour
+			hour++;		//Don't forget to increment hour
+		}
+		else
+			min = 0;
 		//1 index per 15 minutes
 		int index = min/15;
 		//4 indices per hour
