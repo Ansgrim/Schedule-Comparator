@@ -46,7 +46,21 @@ public class Control {
 			}
 			
 			int shiftLength = 8;	//default 8 hour shifts
-			
+			int shiftCount = 0;
+			//Count the number of shifts this employee has
+			for(int dayofweek = 2; dayofweek < sh.length; dayofweek++)
+			{
+				//If the string is longer than length 0, then its a shift
+				if(sh[dayofweek].length() > 0)
+				{
+					shiftCount++;
+				}
+			}
+			//If they have only 8 shifts, they are 10 hour shifts
+			if(shiftCount == 8)
+				shiftLength = 10;
+			//Generally most will have 10 8-hour shifts
+				
 			//Parse through the rest of the line, this should be just times
 			//The dayofweek represents the day of the week the shift is on
 			//the first sunday = 2, first monday = 3, first tuesday = 4, etc.
@@ -100,6 +114,20 @@ public class Control {
 			}
 			
 			int shiftLength = 8;	//default 8 hour shifts
+			int shiftCount = 0;
+			//Count the number of shifts this employee has
+			for(int dayofweek = 2; dayofweek < sh.length; dayofweek++)
+			{
+				//If the string is longer than length 0, then its a shift
+				if(sh[dayofweek].length() > 0)
+				{
+					shiftCount++;
+				}
+			}
+			//If they have only 8 shifts, they are 10 hour shifts
+			if(shiftCount == 8)
+				shiftLength = 10;
+			//Generally most will have 10 8-hour shifts
 			
 			//Parse through the rest of the line, this should be just times
 			//The dayofweek represents the day of the week the shift is on
