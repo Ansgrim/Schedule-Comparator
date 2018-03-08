@@ -11,7 +11,7 @@ public class Control {
 		parse("test", "dont throw an error");
 	}
 
-	public static TimeSlot[] parse(String mou, String opas) throws IOException {
+	public static TimeSlot[] parse(String opas, String mou) throws IOException {
 		//file chooser for picking the file - simple, quick for testing purposes - need file restrictions eventually
 		/*JFileChooser fc = new JFileChooser();
 		int returnVal = fc.showOpenDialog(null);
@@ -44,6 +44,9 @@ public class Control {
 				String id = sh[0].substring(1, 3);
 				System.out.println(id);		//LINE OF CODE FOR TESTING PURPOSES
 			}
+			
+			int shiftLength = 8;	//default 8 hour shifts
+			
 			//Parse through the rest of the line, this should be just times
 			//The dayofweek represents the day of the week the shift is on
 			//the first sunday = 2, first monday = 3, first tuesday = 4, etc.
@@ -54,9 +57,14 @@ public class Control {
 				//If the shift exists for this day, add it
 				if(sh[dayofweek].length() > 0)
 				{
-					//We increment the TimeSlot associated with the shift - addNeeded for OPAS schedules, addScheduled for MOU schedules
+					//We increment the TimeSlot associated with the shift - addBaseline for first schedule, addComparison for second schedule
 					//We know what TimeSlot it is via the TimeSlot method
-					shifts[TimeSlot.getIndex(dayofweek-2, sh[dayofweek])].addNeeded();
+					int index = TimeSlot.getIndex(dayofweek-2,  sh[dayofweek]);
+					//Also gotta addBaseline to all other shifts hit by this start time
+					for(int i = 0; i < shiftLength*4; i++)
+					{
+						shifts[index].addBaseline();
+					}
 				}
 			}
 			System.out.println();
@@ -65,7 +73,7 @@ public class Control {
 		}
 
 
-		//Once more, for the MOU
+		//Once more, for the second schedule
 		//Read in the lines of the csv
 		br = new BufferedReader(new FileReader(mou));
 		line = "";
@@ -90,6 +98,9 @@ public class Control {
 				String id = sh[0].substring(1, 3);
 				System.out.println(id);		//LINE OF CODE FOR TESTING PURPOSES
 			}
+			
+			int shiftLength = 8;	//default 8 hour shifts
+			
 			//Parse through the rest of the line, this should be just times
 			//The dayofweek represents the day of the week the shift is on
 			//the first sunday = 2, first monday = 3, first tuesday = 4, etc.
@@ -100,9 +111,14 @@ public class Control {
 				//If the shift exists for this day, add it
 				if(sh[dayofweek].length() > 0)
 				{
-					//We increment the TimeSlot associated with the shift - addNeeded for OPAS schedules, addScheduled for MOU schedules
+					//We increment the TimeSlot associated with the shift - addBaseline for first schedule, addComparison for second schedule
 					//We know what TimeSlot it is via the TimeSlot method
-					shifts[TimeSlot.getIndex(dayofweek-2, sh[dayofweek])].addScheduled();
+					int index = TimeSlot.getIndex(dayofweek-2, sh[dayofweek]);
+					//Also gotta addBaseline to all other shifts hit by this start time
+					for(int i = 0; i < shiftLength*4; i++)
+					{
+						shifts[index].addComparison();
+					}				
 				}
 			}
 			System.out.println();
@@ -120,28 +136,28 @@ public class Control {
 
 class TimeSlot {
 
-	private int needed;
-	private int scheduled;
-	private int coverage;
+	private int baseline;
+	private int comparison;
+	private int difference;
 
 	public TimeSlot() {
-		needed = 0;
-		scheduled = 0;
-		coverage = 0;
+		baseline = 0;
+		comparison = 0;
+		difference = 0;
 	}
 
-	public void addNeeded() {
-		needed++;
-		coverage--;
+	public void addBaseline() {
+		baseline++;
+		difference--;
 	}
 
-	public void addScheduled() {
-		scheduled++;
-		coverage++;
+	public void addComparison() {
+		comparison++;
+		difference++;
 	}
 
-	public int getCoverage() {
-		return coverage;
+	public int getDifference() {
+		return difference;
 	}
 
 	//given the index the time slot is in, what time is that?
@@ -234,9 +250,9 @@ class TimeSlot {
 		return index;
 	}
 
-	//toString method, prints scheduled, needed, and coverage of this TimeSlot
+	//toString method, prints comparison, baseline, and difference of this TimeSlot
 	//NOTE: the TimeSlot does not know what time it resides in
 	public String toString() {
-		return "Scheduled: " + scheduled + "   Needed: " + needed + "   Coverage: " + coverage;
+		return "comparison: " + comparison + "   baseline: " + baseline + "   difference: " + difference;
 	}
 }
