@@ -13,6 +13,12 @@ import javafx.stage.Stage;
 @SuppressWarnings("serial")
 public class UI{
 	
+	private Stage mStage;
+	
+	public void setStage(Stage mStage) {
+		this.mStage = mStage;
+	}
+	
 	@FXML
     private VBox importPane;
 	
@@ -35,12 +41,14 @@ public class UI{
     void compareSchedules(ActionEvent event) {
     	System.out.println("Compare Button Pressed!");
     	try {
-    		Parent root = FXMLLoader.load(getClass().getResource("Display.fxml"));
-    		Stage stage = new Stage();
+    		FXMLLoader loader = new FXMLLoader();
+    		Parent root = loader.load(getClass().getResource("Display.fxml").openStream());
+    		UI2 ui2 = loader.getController();
+    		ui2.setStage(mStage);
     		
-    		stage.setTitle("Comparing" + s1Label.getText() + " and " + s2Label.getText());
-    		stage.setScene(new Scene(root));
-    		stage.show();
+    		mStage.setTitle("Comparing" + s1Label.getText() + " and " + s2Label.getText());
+    		mStage.setScene(new Scene(root));
+    		mStage.show();
 		} catch (IOException e) {
 			System.out.println("Other Panel could not be loaded!");
 			e.printStackTrace();

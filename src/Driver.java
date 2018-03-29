@@ -9,7 +9,10 @@ public class Driver extends Application{
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("ImportPanel.fxml"));
+		FXMLLoader loader = new FXMLLoader();
+		Parent root = loader.load(getClass().getResource("ImportPanel.fxml").openStream());
+		UI ui = loader.getController();
+		ui.setStage(stage);
 		
 		Scene scene = new Scene(root, 380, 130);
 		
