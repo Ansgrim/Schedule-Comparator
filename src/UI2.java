@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
@@ -36,6 +37,9 @@ public class UI2 {
 
     @FXML
     private TitledPane issuesTextBox;
+    
+    @FXML
+    private LineChart graph;
 
     @FXML
     void displayInfo(ActionEvent event) {
