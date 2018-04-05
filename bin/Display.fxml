@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -35,6 +38,16 @@
                <cursor>
                   <Cursor fx:constant="OPEN_HAND" />
                </cursor>
+               <content>
+                  <LineChart prefHeight="248.0" prefWidth="882.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis animated="false" autoRanging="false" lowerBound="-10.0" minorTickLength="2.0" side="LEFT" tickLength="5.0" tickUnit="2.0" upperBound="10.0" />
+                    </yAxis>
+                  </LineChart>
+               </content>
             </ScrollPane>
          </children>
       </AnchorPane>
