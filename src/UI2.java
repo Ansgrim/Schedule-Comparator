@@ -91,6 +91,8 @@ public class UI2 {
     	ObservableList<Series<String, Integer>> dX = new FilteredList<Series<String, Integer>>(FXCollections.observableArrayList());
     	dX.add(data);
     	graph.setData(dX);
+    	
+    	
     }
 
 
