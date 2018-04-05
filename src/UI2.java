@@ -1,11 +1,16 @@
 import java.io.IOException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart.Data;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
@@ -39,7 +44,7 @@ public class UI2 {
     private TitledPane issuesTextBox;
     
     @FXML
-    private LineChart graph;
+    private LineChart<String, Integer> graph;
 
     @FXML
     void displayInfo(ActionEvent event) {
@@ -67,6 +72,25 @@ public class UI2 {
 			System.out.println("Other Panel could not be loaded!");
 			e.printStackTrace();
 		}
+    }
+    
+    void updateGraph(Control c) {
+    	ObservableList<Series<String, Double>> value = null;
+    	Series<String, Integer> data = new Series<String, Integer>();
+    	TimeSlot[] dataList = c.shifts;
+    	
+    	ObservableList<Data<String, Integer>> dList = new FilteredList<Data<String, Integer>>(FXCollections.observableArrayList());
+    	for(int i=0; i<dataList.length; i++) {
+    		TimeSlot t = dataList[i];
+    		Data<String, Integer> data2 = new Data<String, Integer>();
+    		data2.setXValue(t.getTime(i));
+    		data2.setYValue(t.getDifference());
+    		dList.add(data2);
+    	}
+    	data.setData(dList);
+    	ObservableList<Series<String, Integer>> dX = new FilteredList<Series<String, Integer>>(FXCollections.observableArrayList());
+    	dX.add(data);
+    	graph.setData(dX);
     }
 
 
