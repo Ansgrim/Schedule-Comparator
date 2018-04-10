@@ -8,7 +8,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.MenuItem;
@@ -44,7 +47,7 @@ public class UI2 {
     private TitledPane issuesTextBox;
     
     @FXML
-    private LineChart<String, Integer> graph;
+    private LineChart<String, Number> graph;
 
     @FXML
     void displayInfo(ActionEvent event) {
@@ -75,22 +78,17 @@ public class UI2 {
     }
     
     void updateGraph(Control c) {
-    	ObservableList<Series<String, Double>> value = null;
-    	Series<String, Integer> data = new Series<String, Integer>();
+    	CategoryAxis xAxis = new CategoryAxis();
+    	NumberAxis yAxis = new NumberAxis();
+    	xAxis.setLabel("Day of the Week");
+    	graph = new LineChart<String,Number>(xAxis, yAxis);
+    	XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
     	TimeSlot[] dataList = c.shifts;
-    	
-    	ObservableList<Data<String, Integer>> dList = new FilteredList<Data<String, Integer>>(FXCollections.observableArrayList());
     	for(int i=0; i<dataList.length; i++) {
     		TimeSlot t = dataList[i];
-    		Data<String, Integer> data2 = new Data<String, Integer>();
-    		data2.setXValue(t.getTime(i));
-    		data2.setYValue(t.getDifference());
-    		dList.add(data2);
+    		series.getData().add(new XYChart.Data<String, Number>(TimeSlot.getTime(i), t.getDifference()));
     	}
-    	data.setData(dList);
-    	ObservableList<Series<String, Integer>> dX = new FilteredList<Series<String, Integer>>(FXCollections.observableArrayList());
-    	dX.add(data);
-    	graph.setData(dX);
+    	graph.getData().add(series);
     	
     	
     }
