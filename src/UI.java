@@ -1,4 +1,7 @@
+import java.io.File;
 import java.io.IOException;
+
+import javax.swing.JFileChooser;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-@SuppressWarnings("serial")
 public class UI{
 	
 	private Stage mStage;
@@ -18,6 +20,10 @@ public class UI{
 	public void setStage(Stage mStage) {
 		this.mStage = mStage;
 	}
+	
+	private String scheduleOne = "";
+	
+	private String scheduleTwo = "";
 	
 	@FXML
     private VBox importPane;
@@ -40,28 +46,46 @@ public class UI{
     @FXML
     void compareSchedules(ActionEvent event) {
     	System.out.println("Compare Button Pressed!");
-    	try {
-    		FXMLLoader loader = new FXMLLoader();
-    		Parent root = loader.load(getClass().getResource("Display.fxml").openStream());
-    		UI2 ui2 = loader.getController();
-    		ui2.setStage(mStage);
-    		
-    		mStage.setTitle("Comparing" + s1Label.getText() + " and " + s2Label.getText());
-    		mStage.setScene(new Scene(root));
-    		mStage.show();
-		} catch (IOException e) {
-			System.out.println("Other Panel could not be loaded!");
-			e.printStackTrace();
-		}
+    	if(!scheduleOne.equals("") & !scheduleTwo.equals("")) {
+    		try {
+    			FXMLLoader loader = new FXMLLoader();
+    			Parent root = loader.load(getClass().getResource("Display.fxml").openStream());
+    			UI2 ui2 = loader.getController();
+    			ui2.setStage(mStage);
+    			TimeSlot[] shifts = Control.parse(scheduleOne, scheduleTwo);
+    			ui2.updateGraph(shifts);
+
+    			mStage.setTitle("Comparing" + s1Label.getText() + " and " + s2Label.getText());
+    			mStage.setScene(new Scene(root));
+    			mStage.show();
+    		} catch (IOException e) {
+    			System.out.println("Other Panel could not be loaded!");
+    			e.printStackTrace();
+    		}
+    	}
     }
 
     @FXML
     void importSchedule1(ActionEvent event) {
-    	System.out.println("Schedule 1 Button Pressed!");
+    	System.out.println("Import Schedule 1 button pressed!");
+    	JFileChooser fc = new JFileChooser();
+		int returnVal = fc.showOpenDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            scheduleOne = file.getPath();
+            s1Label.setText(file.getName());
+        }
     }
 
     @FXML
     void importSchedule2(ActionEvent event) {
-    	System.out.println("Schedule 2 Button Pressed!");
+    	System.out.println("Import Schedule 2 button pressed!");
+    	JFileChooser fc = new JFileChooser();
+		int returnVal = fc.showOpenDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            scheduleTwo = file.getPath();
+            s2Label.setText(file.getName());
+        }
     }
 }
