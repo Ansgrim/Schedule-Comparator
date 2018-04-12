@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class UI{
@@ -68,24 +70,30 @@ public class UI{
     @FXML
     void importSchedule1(ActionEvent event) {
     	System.out.println("Import Schedule 1 button pressed!");
-    	JFileChooser fc = new JFileChooser();
-		int returnVal = fc.showOpenDialog(null);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
-            scheduleOne = file.getPath();
-            s1Label.setText(file.getName());
-        }
+    	FileChooser fileChooser = new FileChooser();
+    	fileChooser.setTitle("Choose First Schedule");
+    	fileChooser.getExtensionFilters().addAll(
+    	        new ExtensionFilter("Comma Separated Value", "*.csv"),
+    	        new ExtensionFilter("All Files", "*.*"));
+    	File selectedFile = fileChooser.showOpenDialog(null);
+    	if(selectedFile != null){
+    		scheduleOne = selectedFile.getPath();
+            s1Label.setText(selectedFile.getName());
+    	}
     }
 
     @FXML
     void importSchedule2(ActionEvent event) {
     	System.out.println("Import Schedule 2 button pressed!");
-    	JFileChooser fc = new JFileChooser();
-		int returnVal = fc.showOpenDialog(null);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
-            scheduleTwo = file.getPath();
-            s2Label.setText(file.getName());
-        }
+    	FileChooser fileChooser = new FileChooser();
+    	fileChooser.setTitle("Choose Second Schedule");
+    	fileChooser.getExtensionFilters().addAll(
+    	        new ExtensionFilter("Comma Separated Value", "*.csv"),
+    	        new ExtensionFilter("All Files", "*.*"));
+    	File selectedFile = fileChooser.showOpenDialog(null);
+    	if(selectedFile != null){
+    		scheduleTwo = selectedFile.getPath();
+            s2Label.setText(selectedFile.getName());
+    	}
     }
 }
