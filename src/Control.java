@@ -3,8 +3,6 @@ import javax.swing.JFileChooser;
 
 public class Control {
 
-	public static TimeSlot[] shifts = new TimeSlot[1334];
-
 	//simple main method - to be deleted upon completion of project
 	public static void main(String[] args) throws IOException {
 
@@ -12,6 +10,12 @@ public class Control {
 	}
 
 	public static TimeSlot[] parse(String opas, String mou) throws IOException {
+		
+		TimeSlot[] shifts = new TimeSlot[1344];
+		
+		for(int i = 0; i < shifts.length; i++)
+			shifts[i] = new TimeSlot();
+		
 		//file chooser for picking the file - simple, quick for testing purposes - need file restrictions eventually
 		/*JFileChooser fc = new JFileChooser();
 		int returnVal = fc.showOpenDialog(null);
@@ -42,7 +46,7 @@ public class Control {
 				//Find the 2-letter designation for a person
 				//The name takes up two indicies cause they separate the last and first names with a comma
 				String id = sh[0].substring(1, 3);
-				System.out.println(id);		//LINE OF CODE FOR TESTING PURPOSES
+				//System.out.println(id);		//LINE OF CODE FOR TESTING PURPOSES
 			}
 			
 			int shiftLength = 8;	//default 8 hour shifts
@@ -77,7 +81,7 @@ public class Control {
 					//Also gotta addBaseline to all other shifts hit by this start time
 					for(int i = 0; i < shiftLength*4; i++)
 					{
-						shifts[index].addBaseline();
+						shifts[(index+i) % 1344].addBaseline();
 					}
 				}
 			}
@@ -145,7 +149,7 @@ public class Control {
 					//Also gotta addBaseline to all other shifts hit by this start time
 					for(int i = 0; i < shiftLength*4; i++)
 					{
-						shifts[index].addComparison();
+						shifts[(index+i) % 1344].addComparison();
 					}				
 				}
 			}

@@ -109,7 +109,7 @@ public class TimeSlot {
 		index += 4*hour;
 		//96 indices per day
 		index += 96*day;
-
+		
 		//return the correct index for this time
 		return index;
 	}
