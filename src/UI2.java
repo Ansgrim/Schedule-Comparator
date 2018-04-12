@@ -44,7 +44,7 @@ public class UI2 {
 		ArrayList<String> problemStrings = new ArrayList<String>();
 		for(int j = 0; j < problems.size(); j++)
 		{
-			//String message = ""
+			String message = TimeSlot.getTime(problemIndices.get(j));
 		}
 		return problemStrings;
 		
