@@ -28,6 +28,10 @@ public class UI2 {
 		this.mStage = mStage;
 	}
 	
+	public void getProblemSlots(TimeSlot[] slots, int differenceThreshold){
+		
+	}
+	
 	@FXML
     private VBox display;
 	
