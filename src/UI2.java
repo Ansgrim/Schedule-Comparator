@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,7 +29,24 @@ public class UI2 {
 		this.mStage = mStage;
 	}
 	
-	public void getProblemSlots(TimeSlot[] slots, int differenceThreshold){
+	public ArrayList<String> getProblemSlots(TimeSlot[] slots, int differenceThreshold)
+	{
+		ArrayList<TimeSlot> problems = new ArrayList<TimeSlot>();
+		ArrayList<Integer> problemIndices = new ArrayList<Integer>();
+		for(int i = 0; i < slots.length; i++)
+		{
+			if(Math.abs(slots[i].getDifference()) >= differenceThreshold)
+			{
+				problems.add(slots[i]);
+				problemIndices.add(new Integer(i));
+			}
+		}
+		ArrayList<String> problemStrings = new ArrayList<String>();
+		for(int j = 0; j < problems.size(); j++)
+		{
+			//String message = ""
+		}
+		return problemStrings;
 		
 	}
 	
