@@ -45,6 +45,7 @@ public class UI2 {
 		for(int j = 0; j < problems.size(); j++)
 		{
 			String message = TimeSlot.getTime(problemIndices.get(j));
+			problemStrings.add(message);
 		}
 		return problemStrings;
 		//Test
