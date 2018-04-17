@@ -53,9 +53,9 @@ public class UI{
     			FXMLLoader loader = new FXMLLoader();
     			Parent root = loader.load(getClass().getResource("Display.fxml").openStream());
     			UI2 ui2 = loader.getController();
-    			ui2.setStage(mStage);
     			TimeSlot[] shifts = Control.parse(scheduleOne, scheduleTwo);
     			ui2.updateGraph(shifts);
+    			ui2.setStage(mStage);
 
     			mStage.setTitle("Comparing" + s1Label.getText() + " and " + s2Label.getText());
     			mStage.setScene(new Scene(root));

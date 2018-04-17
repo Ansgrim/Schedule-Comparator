@@ -101,16 +101,13 @@ public class UI2 {
     }
     
     void updateGraph(TimeSlot[] dataList) {
-    	CategoryAxis xAxis = new CategoryAxis();
-    	NumberAxis yAxis = new NumberAxis();
-    	xAxis.setLabel("Day of the Week");
-    	graph = new LineChart<String,Number>(xAxis, yAxis);
+    	graph.getXAxis().setLabel("Day of the Week");
     	XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
     	for(int i=0; i<dataList.length; i++) {
     		TimeSlot t = dataList[i];
     		series.getData().add(new XYChart.Data<String, Number>(TimeSlot.getTime(i), t.getDifference()));
     	}
-    	graph.getData().add(series);    	
+    	graph.getData().add(series);   
     }
 
 
