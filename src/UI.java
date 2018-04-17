@@ -47,7 +47,7 @@ public class UI{
 
     @FXML
     void compareSchedules(ActionEvent event) {
-    	System.out.println("Compare Button Pressed!");
+    	//System.out.println("Compare Button Pressed!");
     	if(!scheduleOne.equals("") & !scheduleTwo.equals("")) {
     		try {
     			FXMLLoader loader = new FXMLLoader();
@@ -61,7 +61,7 @@ public class UI{
     			mStage.setScene(new Scene(root));
     			mStage.show();
     		} catch (IOException e) {
-    			System.out.println("Other Panel could not be loaded!");
+    			//System.out.println("Other Panel could not be loaded!");
     			e.printStackTrace();
     		}
     	}
@@ -69,7 +69,7 @@ public class UI{
 
     @FXML
     void importSchedule1(ActionEvent event) {
-    	System.out.println("Import Schedule 1 button pressed!");
+    	//System.out.println("Import Schedule 1 button pressed!");
     	FileChooser fileChooser = new FileChooser();
     	fileChooser.setTitle("Choose First Schedule");
     	fileChooser.getExtensionFilters().addAll(
@@ -84,7 +84,7 @@ public class UI{
 
     @FXML
     void importSchedule2(ActionEvent event) {
-    	System.out.println("Import Schedule 2 button pressed!");
+    	//System.out.println("Import Schedule 2 button pressed!");
     	FileChooser fileChooser = new FileChooser();
     	fileChooser.setTitle("Choose Second Schedule");
     	fileChooser.getExtensionFilters().addAll(

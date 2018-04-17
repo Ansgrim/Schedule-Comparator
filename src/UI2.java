@@ -74,17 +74,17 @@ public class UI2 {
 
     @FXML
     void displayInfo(ActionEvent event) {
-    	System.out.println("Display Information");
+    	//System.out.println("Display Information");
     }
 
     @FXML
     void exportReport(ActionEvent event) {
-    	System.out.println("Export this report to a PDF");
+    	//System.out.println("Export this report to a PDF");
     }
 
     @FXML
     void newComparison(ActionEvent event) {
-    	System.out.println("Go back to previous screen to change schedules.");
+    	//System.out.println("Go back to previous screen to change schedules.");
     	try {
     		FXMLLoader loader = new FXMLLoader();
     		Parent root = loader.load(getClass().getResource("ImportPanel.fxml").openStream());
@@ -95,7 +95,7 @@ public class UI2 {
     		mStage.setScene(new Scene(root));
     		mStage.show();
 		} catch (IOException e) {
-			System.out.println("Other Panel could not be loaded!");
+			//System.out.println("Other Panel could not be loaded!");
 			e.printStackTrace();
 		}
     }
