@@ -45,7 +45,7 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
                <content>
-                  <LineChart fx:id="graph" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="537.0" prefWidth="1300.0">
+                  <LineChart fx:id="graph" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="537.0" prefWidth="12000.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
