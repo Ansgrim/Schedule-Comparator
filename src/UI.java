@@ -58,6 +58,7 @@ public class UI{
     			ui2.setStage(mStage);
 
     			mStage.setTitle("Comparing" + s1Label.getText() + " and " + s2Label.getText());
+    			mStage.setResizable(true);
     			mStage.setScene(new Scene(root));
     			mStage.show();
     		} catch (IOException e) {

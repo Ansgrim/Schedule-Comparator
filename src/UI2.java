@@ -93,6 +93,7 @@ public class UI2 {
     		ui.setStage(mStage);
     		
     		mStage.setTitle("Schedule Comparator");
+    		mStage.setResizable(false);
     		mStage.setScene(new Scene(root));
     		mStage.show();
 		} catch (IOException e) {

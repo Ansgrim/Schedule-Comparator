@@ -18,6 +18,7 @@ public class Driver extends Application{
 		
 		stage.setTitle("Schedule Comparator");
 		stage.setScene(scene);
+		stage.setResizable(false);
 		stage.show();
 	}
 	
