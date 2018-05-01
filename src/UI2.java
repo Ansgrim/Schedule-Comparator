@@ -17,9 +17,11 @@ import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.control.TableView;
 
 public class UI2 {
 
@@ -71,6 +73,12 @@ public class UI2 {
     private TitledPane issuesTextBox;
     
     @FXML
+    private TableView<String> table;
+    
+    @FXML
+    private TableColumn<String, String> column;
+    
+    @FXML
     private LineChart<String, Number> graph;
 
     @FXML
@@ -109,7 +117,17 @@ public class UI2 {
     		TimeSlot t = dataList[i];
     		series.getData().add(new XYChart.Data<String, Number>(TimeSlot.getTime(i), t.getDifference()));
     	}
-    	graph.getData().add(series);   
+    	graph.getData().add(series);
+    	updateTable(getProblemSlots(dataList, 3));
+    }
+    
+    void updateTable(ArrayList<String> problems){
+    	table = new TableView<String>();
+    	table.setEditable(true);
+    	final ObservableList<String> data = FXCollections.observableArrayList(problems);
+    	column = new TableColumn<String, String>("Problems");
+    	table.setItems(data);
+    	table.getColumns().add(column);
     }
 
 
