@@ -59,9 +59,9 @@
             </ScrollPane>
             <TitledPane fx:id="issuesTextBox" animated="false" collapsible="false" expanded="false" prefHeight="295.0" prefWidth="750.0" text="Issue Spots" GridPane.rowIndex="1">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn fx:id="column" prefWidth="75.0" text="C1" />
                     </columns>
                   </TableView>
                </content></TitledPane>

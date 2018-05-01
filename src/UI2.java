@@ -122,10 +122,11 @@ public class UI2 {
     }
     
     void updateTable(ArrayList<String> problems){
-    	table = new TableView<String>();
+//    	table = new TableView<String>();
     	table.setEditable(true);
     	final ObservableList<String> data = FXCollections.observableArrayList(problems);
     	column = new TableColumn<String, String>("Problems");
+    	column.setEditable(true);
     	table.setItems(data);
     	table.getColumns().add(column);
     }

@@ -71,7 +71,6 @@ public class Control {
 			//look I know it's weird but its just how its gotta work
 			for(int dayofweek = 2; dayofweek < sh.length;  dayofweek++)
 			{
-				System.out.print(sh[dayofweek] + " ");
 				//If the shift exists for this day, add it
 				if(sh[dayofweek].length() > 0)
 				{
@@ -85,7 +84,6 @@ public class Control {
 					}
 				}
 			}
-			System.out.println();
 			//Get the next line
 			line = br.readLine();
 		}
@@ -114,7 +112,6 @@ public class Control {
 				//Find the 2-letter designation for a person
 				//The name takes up two indicies cause they separate the last and first names with a comma
 				String id = sh[0].substring(1, 3);
-				System.out.println(id);		//LINE OF CODE FOR TESTING PURPOSES
 			}
 			
 			int shiftLength = 8;	//default 8 hour shifts
@@ -139,7 +136,6 @@ public class Control {
 			//look I know it's weird but its just how its gotta work
 			for(int dayofweek = 2; dayofweek < sh.length;  dayofweek++)
 			{
-				System.out.print(sh[dayofweek] + " ");
 				//If the shift exists for this day, add it
 				if(sh[dayofweek].length() > 0)
 				{
@@ -153,7 +149,6 @@ public class Control {
 					}				
 				}
 			}
-			System.out.println();
 			//Get the next line
 			line = br.readLine();
 		}
