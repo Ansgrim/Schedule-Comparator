@@ -55,6 +55,7 @@ public class UI{
     			UI2 ui2 = loader.getController();
     			TimeSlot[] shifts = Control.parse(scheduleOne, scheduleTwo);
     			ui2.updateGraph(shifts);
+    			ui2.updateTable(ui2.getProblemSlots(shifts, 0));
     			ui2.setStage(mStage);
 
     			mStage.setTitle("Comparing" + s1Label.getText() + " and " + s2Label.getText());

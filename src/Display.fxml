@@ -4,12 +4,11 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -59,11 +58,7 @@
             </ScrollPane>
             <TitledPane fx:id="issuesTextBox" animated="false" collapsible="false" expanded="false" prefHeight="295.0" prefWidth="750.0" text="Issue Spots" GridPane.rowIndex="1">
                <content>
-                  <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn fx:id="column" prefWidth="75.0" text="C1" />
-                    </columns>
-                  </TableView>
+                  <ListView fx:id="list" fixedCellSize="10.0" prefHeight="200.0" prefWidth="200.0" />
                </content></TitledPane>
          </children>
       </GridPane>
