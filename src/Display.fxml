@@ -41,12 +41,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ScrollPane fx:id="graphPane" hbarPolicy="ALWAYS" prefHeight="367.0" prefWidth="750.0" vbarPolicy="ALWAYS" GridPane.halignment="CENTER">
+            <ScrollPane fx:id="graphPane" fitToHeight="true" hbarPolicy="ALWAYS" maxHeight="1.7976931348623157E308" prefHeight="367.0" prefWidth="750.0" vbarPolicy="ALWAYS" GridPane.halignment="CENTER" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
                <content>
-                  <LineChart fx:id="graph" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="537.0" prefWidth="12000.0">
+                  <LineChart fx:id="graph" animated="false" legendVisible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="537.0" prefWidth="12000.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -56,7 +56,7 @@
                   </LineChart>
                </content>
             </ScrollPane>
-            <TitledPane fx:id="issuesTextBox" animated="false" collapsible="false" prefHeight="285.0" prefWidth="750.0" text="Issue Spots" GridPane.rowIndex="1">
+            <TitledPane fx:id="issuesTextBox" animated="false" collapsible="false" maxHeight="1.7976931348623157E308" prefHeight="285.0" prefWidth="750.0" text="Issue Spots" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
                <content>
                   <ListView fx:id="list" prefHeight="198.0" prefWidth="749.0" />
                </content>

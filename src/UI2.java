@@ -102,9 +102,11 @@ public class UI2 {
     		ui.setStage(mStage);
     		
     		mStage.setTitle("Schedule Comparator");
+    		mStage.setFullScreen(true);
     		mStage.setResizable(false);
     		mStage.setScene(new Scene(root));
     		mStage.show();
+    		
 		} catch (IOException e) {
 			//System.out.println("Other Panel could not be loaded!");
 			e.printStackTrace();
@@ -112,7 +114,7 @@ public class UI2 {
     }
     
     void updateGraph(TimeSlot[] dataList) {
-    	graph.getXAxis().setLabel("Day of the Week");
+//    	graph.getXAxis().setLabel("Day of the Week");
     	XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
     	for(int i=0; i<dataList.length; i++) {
     		TimeSlot t = dataList[i];
