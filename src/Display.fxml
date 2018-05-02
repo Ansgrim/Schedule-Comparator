@@ -56,10 +56,11 @@
                   </LineChart>
                </content>
             </ScrollPane>
-            <TitledPane fx:id="issuesTextBox" animated="false" collapsible="false" expanded="false" prefHeight="295.0" prefWidth="750.0" text="Issue Spots" GridPane.rowIndex="1">
+            <TitledPane fx:id="issuesTextBox" animated="false" collapsible="false" prefHeight="285.0" prefWidth="750.0" text="Issue Spots" GridPane.rowIndex="1">
                <content>
-                  <ListView fx:id="list" fixedCellSize="10.0" prefHeight="200.0" prefWidth="200.0" />
-               </content></TitledPane>
+                  <ListView fx:id="list" prefHeight="198.0" prefWidth="749.0" />
+               </content>
+            </TitledPane>
          </children>
       </GridPane>
    </children>

@@ -122,7 +122,7 @@ public class UI2 {
     }
     
     void updateTable(ArrayList<String> problems){
-    	final ObservableList<String> data = FXCollections.observableArrayList(problems);
+    	ObservableList<String> data = FXCollections.observableArrayList(problems);
     	list.getItems().addAll(data);
     }
 
