@@ -50,7 +50,7 @@ public class UI2 {
 		ArrayList<String> problemStrings = new ArrayList<String>();
 		for(int j = 0; j < problems.size(); j++)
 		{
-			String message = TimeSlot.getTime(problemIndices.get(j));
+			String message = TimeSlot.getTime(problemIndices.get(j)) + " is off by " + slots[problemIndices.get(j)].getDifference() + " controllers.";
 			problemStrings.add(message);
 		}
 		return problemStrings;
